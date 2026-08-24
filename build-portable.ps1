@@ -1,8 +1,14 @@
 <#
-    Builds a self-contained, portable Windows package for Invento.
-    The output bundles its own Java runtime, so target machines need
-    NO Java or Maven installed - just copy the folder (or the zip)
-    and double-click Invento.exe.
+    Builds Windows distributables for Invento:
+      1. A portable, self-contained app folder + zip (no install, run from
+         anywhere - USB drives, shared folders).
+      2. A proper Windows installer (.exe) with Start Menu/Desktop shortcuts,
+         installable without admin rights.
+
+    Both bundle their own Java runtime - target machines need NO Java or
+    Maven installed. The installer step needs the WiX Toolset (v3); if it's
+    not present, the script still produces the portable build and skips the
+    installer with a warning instead of failing outright.
 
     Usage:  powershell -ExecutionPolicy Bypass -File build-portable.ps1
 #>
@@ -44,29 +50,54 @@ $stageDir = Join-Path $distDir "stage"
 New-Item -ItemType Directory -Path $stageDir | Out-Null
 Copy-Item $jarPath -Destination $stageDir
 
-Write-Host "==> Packaging self-contained app with jpackage..." -ForegroundColor Cyan
-jpackage `
-    --type app-image `
-    --input "$stageDir" `
-    --dest "$distDir" `
-    --name $appName `
-    --main-jar $mainJar `
-    --main-class $mainClass `
-    --icon "$iconPath" `
-    --app-version $appVersion `
-    --vendor "$vendor" `
-    --java-options "-Dfile.encoding=UTF-8"
+$commonArgs = @(
+    "--input", "$stageDir",
+    "--name", $appName,
+    "--main-jar", $mainJar,
+    "--main-class", $mainClass,
+    "--icon", "$iconPath",
+    "--app-version", $appVersion,
+    "--vendor", $vendor,
+    "--java-options", "-Dfile.encoding=UTF-8"
+)
 
-if ($LASTEXITCODE -ne 0) { throw "jpackage failed." }
-Remove-Item $stageDir -Recurse -Force
+Write-Host "==> Packaging portable app-image with jpackage..." -ForegroundColor Cyan
+jpackage --type app-image --dest "$distDir" @commonArgs
+if ($LASTEXITCODE -ne 0) { throw "jpackage (app-image) failed." }
 
 Write-Host "==> Compressing portable package..." -ForegroundColor Cyan
 Compress-Archive -Path $imageDir -DestinationPath $zipPath -Force
+
+Write-Host "==> Packaging Windows installer with jpackage..." -ForegroundColor Cyan
+$installerOk = $true
+try {
+    jpackage --type exe --dest "$distDir" @commonArgs `
+        --win-shortcut `
+        --win-menu `
+        --win-per-user-install `
+        --win-shortcut-prompt `
+        --description "ICT Laboratory Device Lending Management System"
+    if ($LASTEXITCODE -ne 0) { $installerOk = $false }
+} catch {
+    $installerOk = $false
+    Write-Host "  jpackage installer step failed: $_" -ForegroundColor Yellow
+}
+
+if (-not $installerOk) {
+    Write-Host "  Skipping installer (WiX Toolset v3 is required: 'choco install wixtoolset')." -ForegroundColor Yellow
+}
+
+Remove-Item $stageDir -Recurse -Force
 
 Write-Host ""
 Write-Host "Done. Portable app:" -ForegroundColor Green
 Write-Host "  Folder: $imageDir"
 Write-Host "  Zip:    $zipPath"
+if ($installerOk) {
+    $installerPath = Get-ChildItem $distDir -Filter "*.exe" | Select-Object -First 1
+    Write-Host "Installer:" -ForegroundColor Green
+    Write-Host "  $($installerPath.FullName)"
+}
 Write-Host ""
-Write-Host "Copy either one to a flash drive or upload the zip to a GitHub Release." -ForegroundColor Green
-Write-Host "End users just run Invento.exe inside the folder - no Java install needed." -ForegroundColor Green
+Write-Host "Copy the portable zip to a flash drive, or share the installer .exe for a normal install." -ForegroundColor Green
+Write-Host "Either way, no Java install is needed on the target machine." -ForegroundColor Green
