@@ -74,6 +74,7 @@ try {
     jpackage --type exe --dest "$distDir" @commonArgs `
         --win-shortcut `
         --win-menu `
+        --win-menu-group $appName `
         --win-per-user-install `
         --win-shortcut-prompt `
         --description "ICT Laboratory Device Lending Management System"
