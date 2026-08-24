@@ -1,0 +1,239 @@
+/* Invento dark theme — blue family */
+
+.theme-dark {
+    -fx-background-color: #0b1220;
+}
+
+.theme-dark .shell-root,
+.theme-dark .content-area {
+    -fx-background-color: #0b1220;
+}
+
+.theme-dark .page-title,
+.theme-dark .section-title,
+.theme-dark .kpi-value {
+    -fx-text-fill: #f1f5f9;
+}
+
+.theme-dark .page-subtitle,
+.theme-dark .kpi-label {
+    -fx-text-fill: #94a3b8;
+}
+
+.theme-dark .panel,
+.theme-dark .kpi-card {
+    -fx-background-color: #111827;
+    -fx-border-color: #1e3a5f;
+}
+
+.theme-dark .page-kicker {
+    -fx-text-fill: #64748b;
+}
+
+.theme-dark .sidebar {
+    -fx-background-color: #1e3a8a;
+}
+
+.theme-dark .sidebar-brand-box {
+    -fx-border-color: transparent transparent rgba(255,255,255,0.12) transparent;
+}
+
+.theme-dark .text-field,
+.theme-dark .password-field,
+.theme-dark .combo-box,
+.theme-dark .combo-box .list-cell,
+.theme-dark .text-area {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #1e3a5f;
+    -fx-text-fill: #e2e8f0;
+    -fx-prompt-text-fill: #64748b;
+}
+
+.theme-dark .text-field:focused,
+.theme-dark .password-field:focused,
+.theme-dark .combo-box:focused,
+.theme-dark .text-area:focused {
+    -fx-border-color: #60a5fa;
+}
+
+.theme-dark .btn-secondary {
+    -fx-background-color: #1e3a5f;
+    -fx-text-fill: #bfdbfe;
+}
+
+.theme-dark .btn-secondary:hover {
+    -fx-background-color: #2547b0;
+}
+
+.theme-dark .table-view {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: #111827;
+}
+
+.theme-dark .table-view .column-header-background {
+    -fx-background-color: #0f172a;
+}
+
+.theme-dark .table-view .column-header .label {
+    -fx-text-fill: #94a3b8;
+}
+
+.theme-dark .table-row-cell {
+    -fx-background-color: #111827;
+    -fx-border-color: transparent transparent #1e293b transparent;
+    -fx-text-fill: #e2e8f0;
+}
+
+.theme-dark .table-row-cell:odd {
+    -fx-background-color: #0f172a;
+}
+
+.theme-dark .table-row-cell:selected {
+    -fx-background-color: #1e3a8a;
+}
+
+.theme-dark .table-row-cell:selected .text {
+    -fx-fill: #f8fafc;
+}
+
+.theme-dark .form-grid .label {
+    -fx-text-fill: #cbd5e1;
+}
+
+.theme-dark .login-root {
+    -fx-background-color: #0b1220;
+}
+
+.theme-dark .login-card-shell,
+.theme-dark .login-column {
+    -fx-background-color: #111827;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 28, 0.22, -8, 0);
+}
+
+.theme-dark .login-welcome-chip {
+    -fx-background-color: rgba(37, 99, 235, 0.25);
+    -fx-text-fill: #93c5fd;
+}
+
+.theme-dark .login-logo-sub {
+    -fx-text-fill: #64748b;
+}
+
+.theme-dark .login-rule .line {
+    -fx-border-color: #1e293b transparent transparent transparent;
+}
+
+.theme-dark .login-brand-hero {
+    -fx-text-fill: #f1f5f9;
+}
+
+.theme-dark .login-brand-tag,
+.theme-dark .login-brand-blurb {
+    -fx-text-fill: #94a3b8;
+}
+
+.theme-dark .login-form-title {
+    -fx-text-fill: #f1f5f9;
+}
+
+.theme-dark .login-subtitle,
+.theme-dark .login-label,
+.theme-dark .login-hint {
+    -fx-text-fill: #94a3b8;
+}
+
+.theme-dark .login-input {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #1e293b;
+    -fx-text-fill: #f1f5f9;
+}
+
+.theme-dark .login-input:focused {
+    -fx-border-color: #60a5fa;
+    -fx-background-color: #111827;
+}
+
+.theme-dark .login-decor-ring {
+    -fx-stroke: rgba(96, 165, 250, 0.22);
+}
+
+.theme-dark .login-decor-ring-soft {
+    -fx-stroke: rgba(148, 163, 184, 0.18);
+}
+
+.theme-dark .kpi-hint {
+    -fx-text-fill: #64748b;
+}
+
+.theme-dark .receipt-print-dialog {
+    -fx-background-color: #111827;
+    -fx-border-color: #1e293b;
+}
+
+.theme-dark .receipt-print-heading {
+    -fx-text-fill: #e2e8f0;
+}
+
+.theme-dark .receipt-print-status {
+    -fx-text-fill: #94a3b8;
+}
+
+.theme-dark .receipt-printer-slot {
+    -fx-background-color: linear-gradient(to bottom, #1e293b 0%, #0f172a 100%);
+    -fx-border-color: #334155;
+}
+
+.theme-dark .thermal-receipt-paper {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #e2e8f0;
+}
+
+.theme-dark .device-image-box {
+    -fx-background-color: #1e293b;
+    -fx-border-color: #1e3a5f;
+}
+
+.theme-dark .device-image-placeholder {
+    -fx-text-fill: #94a3b8;
+}
+
+.theme-dark .pos-device-card,
+.theme-dark .inv-card {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #1e3a5f;
+}
+
+.theme-dark .pos-device-card:hover,
+.theme-dark .inv-card:hover {
+    -fx-border-color: #64748b;
+    -fx-background-color: #111827;
+}
+
+.theme-dark .btn-toggle {
+    -fx-background-color: #1e3a5f;
+    -fx-text-fill: #bfdbfe;
+}
+
+.theme-dark .btn-toggle:selected {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+}
+
+.theme-dark .pos-card-name {
+    -fx-text-fill: #e2e8f0;
+}
+
+.theme-dark .pos-card-meta,
+.theme-dark .pos-basket-empty {
+    -fx-text-fill: #94a3b8;
+}
+
+.theme-dark .pos-basket-row {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #1e3a5f;
+}
+
+.theme-dark .pos-basket-name {
+    -fx-text-fill: #e2e8f0;
+}

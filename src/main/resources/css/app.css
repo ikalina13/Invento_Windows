@@ -1,0 +1,678 @@
+/* Invento — school ICT lab desktop (flat, practical) */
+
+.root {
+    -fx-font-family: "Segoe UI", "Candara", sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: #eef2f7;
+}
+
+/* ---------- Splash ---------- */
+.splash-root {
+    -fx-background-color: #f5f5f5;
+}
+
+/* ---------- Login (minimal on branded blue) ---------- */
+.login-root {
+    -fx-background-color: #1d4ed8;
+}
+
+.login-shell {
+    -fx-background-color: transparent;
+}
+
+.login-card-shell {
+    -fx-background-color: #ffffff;
+}
+
+.login-column {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.22), 28, 0.18, -8, 0);
+}
+
+.login-welcome-chip {
+    -fx-background-color: #eff6ff;
+    -fx-background-radius: 999;
+    -fx-padding: 4 10 4 10;
+    -fx-text-fill: #1d4ed8;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.login-logo-sub {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 11px;
+}
+
+.login-rule {
+    -fx-padding: 4 0 2 0;
+    -fx-background-color: transparent;
+}
+
+.login-rule .line {
+    -fx-border-color: #e2e8f0 transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+}
+
+.login-brand-pane {
+    -fx-background-color: transparent;
+}
+
+.login-brand-hero {
+    -fx-font-size: 48px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.25), 12, 0.2, 0, 2);
+}
+
+.login-brand-tag {
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-text-fill: rgba(255, 255, 255, 0.94);
+}
+
+.login-brand-blurb {
+    -fx-font-size: 14px;
+    -fx-text-fill: rgba(255, 255, 255, 0.82);
+    -fx-line-spacing: 4px;
+}
+
+.login-form-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #0f172a;
+}
+
+.login-subtitle {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 13px;
+}
+
+.login-label {
+    -fx-text-fill: #475569;
+    -fx-font-weight: 600;
+    -fx-font-size: 12px;
+}
+
+.login-input {
+    -fx-background-color: #f8fafc;
+    -fx-background-radius: 11;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 11;
+    -fx-border-width: 1.25;
+    -fx-padding: 10 14;
+}
+
+.login-input:focused {
+    -fx-border-color: #2563eb;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.18), 10, 0.18, 0, 2);
+}
+
+.login-submit {
+    -fx-background-radius: 11;
+    -fx-background-color: linear-gradient(to right, #1d4ed8, #2563eb);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.35), 12, 0.22, 0, 4);
+}
+
+.login-submit:hover {
+    -fx-background-color: linear-gradient(to right, #1e40af, #1d4ed8);
+}
+
+.login-hint {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 12px;
+}
+
+.login-decor-ring {
+    -fx-fill: transparent;
+    -fx-stroke: rgba(255, 255, 255, 0.22);
+    -fx-stroke-width: 1.5;
+}
+
+.login-decor-ring-soft {
+    -fx-fill: transparent;
+    -fx-stroke: rgba(191, 219, 254, 0.28);
+    -fx-stroke-width: 1.5;
+}
+
+/* ---------- Shell ---------- */
+.shell-root {
+    -fx-background-color: #eef2f7;
+}
+
+.sidebar {
+    -fx-background-color: #1e3a8a;
+    -fx-min-width: 216;
+    -fx-pref-width: 216;
+    -fx-padding: 0 0 8 0;
+}
+
+.sidebar-brand-box {
+    -fx-padding: 18 16 16 16;
+    -fx-border-color: transparent transparent rgba(255,255,255,0.14) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.sidebar-brand {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+}
+
+.sidebar-brand-sub {
+    -fx-text-fill: rgba(255,255,255,0.72);
+    -fx-font-size: 11px;
+}
+
+.sidebar-user {
+    -fx-text-fill: rgba(255,255,255,0.8);
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+}
+
+.sidebar-nav {
+    -fx-padding: 10 8 8 8;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(255,255,255,0.9);
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 9 12;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-max-width: infinity;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 0 3;
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-text-fill: #ffffff;
+}
+
+.nav-button.active {
+    -fx-background-color: rgba(255,255,255,0.14);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #93c5fd;
+}
+
+.nav-signout {
+    -fx-padding: 10 14;
+}
+
+.content-area {
+    -fx-background-color: #eef2f7;
+    -fx-padding: 18 22 22 22;
+}
+
+.page-kicker {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.page-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #0f172a;
+}
+
+.page-subtitle {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+}
+
+.empty-hint {
+    -fx-padding: 20 8;
+}
+
+/* ---------- KPI cards ---------- */
+.kpi-row {
+    -fx-spacing: 12;
+}
+
+.kpi-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-padding: 14 16;
+    -fx-border-color: #d8e0ea;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-pref-width: 180;
+    -fx-min-width: 150;
+}
+
+.kpi-label {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+}
+
+.kpi-value {
+    -fx-font-size: 26px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #0f172a;
+}
+
+/* ---------- Panels / tables ---------- */
+.panel {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-padding: 14;
+    -fx-border-color: #d8e0ea;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+}
+
+.toolbar {
+    -fx-spacing: 10;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.text-field, .password-field, .combo-box, .text-area {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #c5d0de;
+    -fx-border-width: 1;
+    -fx-background-color: #ffffff;
+    -fx-padding: 8 12;
+}
+
+.text-field:focused, .password-field:focused, .combo-box:focused, .text-area:focused {
+    -fx-border-color: #2563eb;
+    -fx-background-color: #ffffff;
+}
+
+.button {
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 8 14;
+    -fx-font-weight: 600;
+}
+
+.btn-toggle {
+    -fx-background-color: #e8eef7;
+    -fx-text-fill: #1e3a8a;
+}
+
+.btn-toggle:selected {
+    -fx-background-color: #1e40af;
+    -fx-text-fill: white;
+}
+
+.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b91c1c;
+    -fx-padding: 2 0;
+    -fx-underline: true;
+    -fx-font-weight: 600;
+}
+
+.btn-ghost:hover {
+    -fx-text-fill: #991b1b;
+}
+
+.toggle-group {
+    -fx-alignment: CENTER_LEFT;
+}
+
+.btn-primary {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #1d4ed8;
+}
+
+.btn-secondary {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #bfdbfe;
+}
+
+.btn-danger {
+    -fx-background-color: #ef4444;
+    -fx-text-fill: white;
+}
+
+.btn-danger:hover {
+    -fx-background-color: #dc2626;
+}
+
+.btn-success {
+    -fx-background-color: #10b981;
+    -fx-text-fill: white;
+}
+
+.btn-success:hover {
+    -fx-background-color: #059669;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #ecf4ff;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 36;
+    -fx-border-color: transparent transparent #dbeafe transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #64748b;
+    -fx-font-weight: 700;
+    -fx-font-size: 11px;
+}
+
+.table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent transparent #f0f5fc transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f8fbff;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #dbeafe;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: #1e3a8a;
+}
+
+.status-available { -fx-text-fill: #059669; -fx-font-weight: 700; }
+.status-low { -fx-text-fill: #d97706; -fx-font-weight: 700; }
+.status-out { -fx-text-fill: #dc2626; -fx-font-weight: 700; }
+.status-borrowed { -fx-text-fill: #d97706; -fx-font-weight: 700; }
+.status-returned { -fx-text-fill: #059669; -fx-font-weight: 700; }
+
+.form-grid .label {
+    -fx-text-fill: #475569;
+    -fx-font-weight: 700;
+    -fx-font-size: 12px;
+}
+
+.section-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #1f2937;
+}
+
+/* Theme switch */
+.theme-switch { -fx-cursor: hand; }
+.theme-switch-track {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+}
+.theme-switch-light .theme-switch-track {
+    -fx-background-color: linear-gradient(to right, #dbeafe, #ffffff);
+    -fx-border-color: #93c5fd;
+}
+.theme-switch-dark .theme-switch-track {
+    -fx-background-color: linear-gradient(to right, #1e3a8a, #1e40af);
+    -fx-border-color: #3b82f6;
+}
+.theme-switch-knob {
+    -fx-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.35), 8, 0.2, 0, 2);
+}
+.theme-switch-dark .theme-switch-knob {
+    -fx-fill: #93c5fd;
+}
+.theme-switch-label {
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #1d4ed8;
+}
+.theme-switch-dark .theme-switch-label {
+    -fx-text-fill: #e0f2fe;
+}
+
+/* Cashier-style receipt printer animation */
+.receipt-print-overlay {
+    -fx-background-color: rgba(15, 23, 42, 0.58);
+    -fx-padding: 28;
+}
+
+.receipt-print-dialog {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 22;
+    -fx-padding: 22 20 20 20;
+    -fx-border-color: rgba(226, 232, 240, 0.95);
+    -fx-border-radius: 22;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.28), 36, 0.22, 0, 14);
+}
+
+.receipt-print-heading {
+    -fx-font-size: 20px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #0f172a;
+}
+
+.receipt-print-status {
+    -fx-font-size: 12px;
+    -fx-text-fill: #64748b;
+    -fx-font-weight: 600;
+}
+
+.receipt-printer-slot {
+    -fx-background-color: linear-gradient(to bottom, #e2e8f0 0%, #f1f5f9 14%, #f8fafc 100%);
+    -fx-background-radius: 18;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 18;
+    -fx-border-width: 1;
+    -fx-effect: innershadow(gaussian, rgba(15, 23, 42, 0.14), 16, 0.2, 0, 4);
+}
+
+.receipt-printer-throat {
+    -fx-background-color: linear-gradient(to bottom, #1e293b, #0f172a);
+    -fx-background-radius: 0 0 12 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 18, 0.28, 0, 8);
+}
+
+.receipt-printer-feed-window {
+    -fx-background-color: transparent;
+}
+
+.thermal-receipt-paper {
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #fffef8 55%, #faf7ef 100%);
+    -fx-background-radius: 16;
+    -fx-border-color: #e7e2d6;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.18), 22, 0.2, 0, 8);
+}
+
+.thermal-receipt-title {
+    -fx-font-family: "Courier New", Consolas, monospace;
+    -fx-font-size: 17px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #0f172a;
+}
+
+.thermal-receipt-type {
+    -fx-font-family: "Courier New", Consolas, monospace;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #1d4ed8;
+    -fx-padding: 4 0 0 0;
+}
+
+.thermal-receipt-muted {
+    -fx-font-family: "Courier New", Consolas, monospace;
+    -fx-font-size: 10px;
+    -fx-text-fill: #64748b;
+}
+
+.thermal-receipt-key {
+    -fx-font-family: "Courier New", Consolas, monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: #64748b;
+    -fx-min-width: 88;
+}
+
+.thermal-receipt-value {
+    -fx-font-family: "Courier New", Consolas, monospace;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #1e293b;
+    -fx-alignment: center-right;
+}
+
+.thermal-receipt-footer {
+    -fx-font-family: "Courier New", Consolas, monospace;
+    -fx-font-size: 10px;
+    -fx-text-fill: #475569;
+    -fx-padding: 4 0 0 0;
+}
+
+.thermal-receipt-rule {
+    -fx-border-color: transparent transparent #d6d3c9 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-pref-height: 1;
+    -fx-min-height: 1;
+}
+
+.thermal-receipt-tear {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #e7e2d6 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dotted;
+}
+
+.receipt-action-done {
+    -fx-background-radius: 12;
+}
+
+.receipt-action-save {
+    -fx-background-radius: 12;
+}
+
+/* ---------- Device photos & booking counter ---------- */
+.device-image-box {
+    -fx-background-color: #e8edf4;
+    -fx-background-radius: 4;
+    -fx-border-color: #cfd8e3;
+    -fx-border-radius: 4;
+    -fx-border-width: 1;
+    -fx-alignment: center;
+}
+
+.device-image-placeholder {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+.device-form-image {
+    -fx-padding: 0 0 8 0;
+}
+
+.pos-catalog {
+    -fx-background-color: transparent;
+}
+
+.pos-catalog-scroll,
+.pos-basket-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background: transparent;
+}
+
+.pos-device-card,
+.inv-card {
+    -fx-background-color: #f8fafc;
+    -fx-background-radius: 6;
+    -fx-border-color: #d8e0ea;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+    -fx-padding: 8;
+    -fx-cursor: hand;
+}
+
+.pos-device-card:hover,
+.inv-card:hover {
+    -fx-border-color: #64748b;
+    -fx-background-color: #ffffff;
+}
+
+.pos-device-card-oos {
+    -fx-opacity: 0.65;
+    -fx-cursor: default;
+}
+
+.pos-card-name {
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #0f172a;
+}
+
+.pos-card-meta {
+    -fx-font-size: 11px;
+    -fx-text-fill: #64748b;
+}
+
+.pos-stock-ok {
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #047857;
+}
+
+.pos-stock-low {
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #b45309;
+}
+
+.pos-stock-out {
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #b91c1c;
+}
+
+.pos-basket-panel {
+    -fx-min-width: 270;
+}
+
+.pos-basket-empty {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+    -fx-padding: 8 2;
+}
+
+.pos-basket-row {
+    -fx-background-color: #f8fafc;
+    -fx-background-radius: 4;
+    -fx-border-color: #d8e0ea;
+    -fx-border-radius: 4;
+    -fx-border-width: 1;
+}
+
+.pos-basket-name {
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #0f172a;
+}
