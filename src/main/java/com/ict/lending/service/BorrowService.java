@@ -42,6 +42,7 @@ public class BorrowService {
             throw new IllegalArgumentException("Add at least one device to the booking basket.");
         }
         Validators.requireNonBlank(borrowerInfo.getFullName(), "Full name");
+        Validators.requireNonBlank(borrowerInfo.getIdNumber(), "ID number");
         Validators.requireNonBlank(borrowerInfo.getPosition(), "Position");
         Validators.requireNonBlank(borrowerInfo.getGradeLevel(), "Grade level / Department");
         Validators.requireNonBlank(borrowerInfo.getSection(), "Section");
@@ -88,6 +89,7 @@ public class BorrowService {
                     updateDeviceQty(conn, deviceId, device.getQuantity(), newAvailable);
 
                     txn.setBorrowerName(borrowerInfo.getFullName());
+                    txn.setIdNumber(borrowerInfo.getIdNumber());
                     txn.setDeviceName(device.getDeviceName());
                     txn.setPosition(borrowerInfo.getPosition());
                     txn.setGradeLevel(borrowerInfo.getGradeLevel());

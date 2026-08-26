@@ -98,17 +98,23 @@ public class ReturnView {
             return;
         }
         BorrowerFormDialog dialog = new BorrowerFormDialog(window(), "Verify Borrower Information", false);
-        dialog.showAndWait().ifPresent(borrower -> completeReturn(selected, borrower));
+        dialog.showAndWait().ifPresent(borrower -> {
+            ReturnConditionDialog conditionDialog =
+                    new ReturnConditionDialog(window(), selected.getDeviceName());
+            conditionDialog.showAndWait().ifPresent(report -> completeReturn(selected, borrower, report));
+        });
     }
 
-    private void completeReturn(Transaction selected, Borrower borrower) {
+    private void completeReturn(Transaction selected, Borrower borrower, String conditionReport) {
         try {
             Transaction updated = controller.returnDevice(
                     selected.getTransactionId(),
                     borrower.getFullName(),
+                    borrower.getIdNumber(),
                     borrower.getPosition(),
                     borrower.getGradeLevel(),
-                    borrower.getSection());
+                    borrower.getSection(),
+                    conditionReport);
             shell.refreshAll();
             boolean print = AlertHelper.confirm(window(), "Return Successful",
                     "Transaction " + updated.getTransactionId() + " marked as returned.\n\nPrint return receipt?");

@@ -39,6 +39,7 @@ public final class SmokeTest {
 
         Borrower borrower = new Borrower();
         borrower.setFullName("Juan Dela Cruz");
+        borrower.setIdNumber("2025-00123");
         borrower.setPosition("Student");
         borrower.setGradeLevel("Grade 12");
         borrower.setSection("ICT-A");
@@ -53,7 +54,8 @@ public final class SmokeTest {
 
         ReturnService returnService = new ReturnService();
         Transaction returned = returnService.returnDevice(
-                txn.getTransactionId(), "Juan Dela Cruz", "Student", "Grade 12", "ICT-A");
+                txn.getTransactionId(), "Juan Dela Cruz", "2025-00123", "Student", "Grade 12", "ICT-A",
+                "No issues");
         assertTrue("Returned".equals(returned.getStatus()), "return status");
 
         List<Transaction> history = new HistoryService().list("", "All");

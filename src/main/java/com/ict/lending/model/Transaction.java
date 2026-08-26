@@ -16,9 +16,11 @@ public class Transaction {
     private LocalDate returnDate;
     private LocalTime returnTime;
     private String status;
+    private String conditionReport;
 
     // Joined display fields
     private String borrowerName;
+    private String idNumber;
     private String deviceName;
     private String position;
     private String gradeLevel;
@@ -107,6 +109,22 @@ public class Transaction {
 
     public void setBorrowerName(String borrowerName) {
         this.borrowerName = borrowerName;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    public String getConditionReport() {
+        return conditionReport;
+    }
+
+    public void setConditionReport(String conditionReport) {
+        this.conditionReport = conditionReport;
     }
 
     public String getDeviceName() {
