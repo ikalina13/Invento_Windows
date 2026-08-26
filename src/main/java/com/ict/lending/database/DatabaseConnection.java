@@ -85,12 +85,14 @@ public final class DatabaseConnection {
                 CREATE TABLE IF NOT EXISTS borrowers (
                     borrower_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     full_name TEXT NOT NULL,
+                    id_number TEXT NOT NULL DEFAULT '',
                     position TEXT NOT NULL,
                     grade_level TEXT NOT NULL,
                     section TEXT NOT NULL,
                     purpose TEXT NOT NULL
                 )
                 """);
+            migrateBorrowersIdNumber(conn);
             st.execute("""
                 CREATE TABLE IF NOT EXISTS transactions (
                     transaction_id TEXT PRIMARY KEY,
@@ -102,10 +104,12 @@ public final class DatabaseConnection {
                     return_date TEXT,
                     return_time TEXT,
                     status TEXT NOT NULL,
+                    condition_report TEXT,
                     FOREIGN KEY (borrower_id) REFERENCES borrowers(borrower_id),
                     FOREIGN KEY (device_id) REFERENCES devices(device_id)
                 )
                 """);
+            migrateTransactionsConditionReport(conn);
             st.execute("""
                 CREATE TABLE IF NOT EXISTS audit_logs (
                     log_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -137,6 +141,42 @@ public final class DatabaseConnection {
         if (!hasImagePath) {
             try (Statement st = conn.createStatement()) {
                 st.execute("ALTER TABLE devices ADD COLUMN image_path TEXT");
+            }
+        }
+    }
+
+    private void migrateBorrowersIdNumber(Connection conn) throws SQLException {
+        boolean hasIdNumber = false;
+        try (Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery("PRAGMA table_info(borrowers)")) {
+            while (rs.next()) {
+                if ("id_number".equalsIgnoreCase(rs.getString("name"))) {
+                    hasIdNumber = true;
+                    break;
+                }
+            }
+        }
+        if (!hasIdNumber) {
+            try (Statement st = conn.createStatement()) {
+                st.execute("ALTER TABLE borrowers ADD COLUMN id_number TEXT NOT NULL DEFAULT ''");
+            }
+        }
+    }
+
+    private void migrateTransactionsConditionReport(Connection conn) throws SQLException {
+        boolean hasConditionReport = false;
+        try (Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery("PRAGMA table_info(transactions)")) {
+            while (rs.next()) {
+                if ("condition_report".equalsIgnoreCase(rs.getString("name"))) {
+                    hasConditionReport = true;
+                    break;
+                }
+            }
+        }
+        if (!hasConditionReport) {
+            try (Statement st = conn.createStatement()) {
+                st.execute("ALTER TABLE transactions ADD COLUMN condition_report TEXT");
             }
         }
     }

@@ -271,6 +271,7 @@ public final class ReceiptPrinterDialog {
                 row("Status", nullSafe(first.getStatus())),
                 rule(),
                 row("Borrower", nullSafe(first.getBorrowerName())),
+                row("ID Number", nullSafe(first.getIdNumber())),
                 row("Position", nullSafe(first.getPosition())),
                 row("Grade/Dept", nullSafe(first.getGradeLevel())),
                 row("Section", nullSafe(first.getSection())),
@@ -293,7 +294,20 @@ public final class ReceiptPrinterDialog {
                 row("Borrowed", IdGenerator.formatDate(first.getBorrowDate())
                         + " " + IdGenerator.formatTime(first.getBorrowTime())),
                 row("Returned", IdGenerator.formatDate(first.getReturnDate())
-                        + " " + IdGenerator.formatTime(first.getReturnTime())),
+                        + " " + IdGenerator.formatTime(first.getReturnTime()))
+        );
+
+        if (returned) {
+            paper.getChildren().addAll(
+                    rule(),
+                    row("Condition Report", first.getConditionReport() == null
+                            || first.getConditionReport().isBlank()
+                            ? "No issues reported"
+                            : first.getConditionReport())
+            );
+        }
+
+        paper.getChildren().addAll(
                 rule(),
                 label("Keep this copy for laboratory records.", "thermal-receipt-footer"),
                 label("*** Invento ***", "thermal-receipt-muted")

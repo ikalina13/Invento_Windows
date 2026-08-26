@@ -20,16 +20,17 @@ public class BorrowerDao {
             conn = DatabaseConnection.getInstance().getConnection();
         }
         String sql = """
-            INSERT INTO borrowers (full_name, position, grade_level, section, purpose)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO borrowers (full_name, id_number, position, grade_level, section, purpose)
+            VALUES (?, ?, ?, ?, ?, ?)
             """;
         try {
             try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, borrower.getFullName());
-                ps.setString(2, borrower.getPosition());
-                ps.setString(3, borrower.getGradeLevel());
-                ps.setString(4, borrower.getSection());
-                ps.setString(5, borrower.getPurpose());
+                ps.setString(2, borrower.getIdNumber());
+                ps.setString(3, borrower.getPosition());
+                ps.setString(4, borrower.getGradeLevel());
+                ps.setString(5, borrower.getSection());
+                ps.setString(6, borrower.getPurpose());
                 ps.executeUpdate();
                 try (ResultSet keys = ps.getGeneratedKeys()) {
                     if (keys.next()) {

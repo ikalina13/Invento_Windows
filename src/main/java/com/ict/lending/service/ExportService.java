@@ -29,8 +29,9 @@ public class ExportService {
             try (Workbook wb = new XSSFWorkbook()) {
                 Sheet sheet = wb.createSheet("Transactions");
                 String[] headers = {
-                        "Transaction ID", "Borrower", "Device", "Qty",
-                        "Borrow Date", "Borrow Time", "Return Date", "Return Time", "Status"
+                        "Transaction ID", "Borrower", "ID Number", "Device", "Qty",
+                        "Borrow Date", "Borrow Time", "Return Date", "Return Time", "Status",
+                        "Condition Report"
                 };
                 Row header = sheet.createRow(0);
                 for (int i = 0; i < headers.length; i++) {
@@ -41,13 +42,15 @@ public class ExportService {
                     Row row = sheet.createRow(rowIdx++);
                     row.createCell(0).setCellValue(t.getTransactionId());
                     row.createCell(1).setCellValue(nullSafe(t.getBorrowerName()));
-                    row.createCell(2).setCellValue(nullSafe(t.getDeviceName()));
-                    row.createCell(3).setCellValue(t.getQuantity());
-                    row.createCell(4).setCellValue(IdGenerator.formatDate(t.getBorrowDate()));
-                    row.createCell(5).setCellValue(IdGenerator.formatTime(t.getBorrowTime()));
-                    row.createCell(6).setCellValue(IdGenerator.formatDate(t.getReturnDate()));
-                    row.createCell(7).setCellValue(IdGenerator.formatTime(t.getReturnTime()));
-                    row.createCell(8).setCellValue(nullSafe(t.getStatus()));
+                    row.createCell(2).setCellValue(nullSafe(t.getIdNumber()));
+                    row.createCell(3).setCellValue(nullSafe(t.getDeviceName()));
+                    row.createCell(4).setCellValue(t.getQuantity());
+                    row.createCell(5).setCellValue(IdGenerator.formatDate(t.getBorrowDate()));
+                    row.createCell(6).setCellValue(IdGenerator.formatTime(t.getBorrowTime()));
+                    row.createCell(7).setCellValue(IdGenerator.formatDate(t.getReturnDate()));
+                    row.createCell(8).setCellValue(IdGenerator.formatTime(t.getReturnTime()));
+                    row.createCell(9).setCellValue(nullSafe(t.getStatus()));
+                    row.createCell(10).setCellValue(nullSafe(t.getConditionReport()));
                 }
                 for (int i = 0; i < headers.length; i++) {
                     sheet.autoSizeColumn(i);
@@ -72,6 +75,7 @@ public class ExportService {
                 rows.append("<tr>")
                         .append("<td>").append(esc(t.getTransactionId())).append("</td>")
                         .append("<td>").append(esc(t.getBorrowerName())).append("</td>")
+                        .append("<td>").append(esc(t.getIdNumber())).append("</td>")
                         .append("<td>").append(esc(t.getDeviceName())).append("</td>")
                         .append("<td>").append(t.getQuantity()).append("</td>")
                         .append("<td>").append(esc(IdGenerator.formatDate(t.getBorrowDate()))).append("</td>")
@@ -79,6 +83,7 @@ public class ExportService {
                         .append("<td>").append(esc(IdGenerator.formatDate(t.getReturnDate()))).append("</td>")
                         .append("<td>").append(esc(IdGenerator.formatTime(t.getReturnTime()))).append("</td>")
                         .append("<td>").append(esc(t.getStatus())).append("</td>")
+                        .append("<td>").append(esc(t.getConditionReport())).append("</td>")
                         .append("</tr>");
             }
             String html = """
@@ -94,9 +99,9 @@ public class ExportService {
                     <p>Generated %s · %d record(s)</p>
                     <table>
                     <thead><tr>
-                    <th>ID</th><th>Borrower</th><th>Device</th><th>Qty</th>
+                    <th>ID</th><th>Borrower</th><th>ID Number</th><th>Device</th><th>Qty</th>
                     <th>Borrow Date</th><th>Borrow Time</th>
-                    <th>Return Date</th><th>Return Time</th><th>Status</th>
+                    <th>Return Date</th><th>Return Time</th><th>Status</th><th>Condition Report</th>
                     </tr></thead>
                     <tbody>%s</tbody>
                     </table></body></html>
@@ -125,6 +130,7 @@ public class ExportService {
             String html = template
                     .replace("{{transactionId}}", esc(txn.getTransactionId()))
                     .replace("{{borrowerName}}", esc(txn.getBorrowerName()))
+                    .replace("{{idNumber}}", esc(txn.getIdNumber()))
                     .replace("{{position}}", esc(txn.getPosition()))
                     .replace("{{gradeLevel}}", esc(txn.getGradeLevel()))
                     .replace("{{section}}", esc(txn.getSection()))
@@ -135,7 +141,10 @@ public class ExportService {
                     .replace("{{borrowTime}}", esc(IdGenerator.formatTime(txn.getBorrowTime())))
                     .replace("{{returnDate}}", esc(IdGenerator.formatDate(txn.getReturnDate())))
                     .replace("{{returnTime}}", esc(IdGenerator.formatTime(txn.getReturnTime())))
-                    .replace("{{status}}", esc(txn.getStatus()));
+                    .replace("{{status}}", esc(txn.getStatus()))
+                    .replace("{{conditionReport}}", esc(nullSafe(txn.getConditionReport())).isBlank()
+                            ? "No issues reported"
+                            : esc(nullSafe(txn.getConditionReport())));
             renderPdf(html, file);
             auditService.log("PRINT_RECEIPT", "Receipt for " + txn.getTransactionId());
             return file;

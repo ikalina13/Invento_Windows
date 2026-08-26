@@ -6,6 +6,7 @@ package com.ict.lending.model;
 public class Borrower {
     private int borrowerId;
     private String fullName;
+    private String idNumber;
     private String position;
     private String gradeLevel;
     private String section;
@@ -14,10 +15,11 @@ public class Borrower {
     public Borrower() {
     }
 
-    public Borrower(int borrowerId, String fullName, String position,
+    public Borrower(int borrowerId, String fullName, String idNumber, String position,
                     String gradeLevel, String section, String purpose) {
         this.borrowerId = borrowerId;
         this.fullName = fullName;
+        this.idNumber = idNumber;
         this.position = position;
         this.gradeLevel = gradeLevel;
         this.section = section;
@@ -38,6 +40,14 @@ public class Borrower {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
     public String getPosition() {

@@ -16,8 +16,8 @@ public class TransactionDao {
 
     private static final String JOIN_SELECT = """
         SELECT t.transaction_id, t.borrower_id, t.device_id, t.quantity,
-               t.borrow_date, t.borrow_time, t.return_date, t.return_time, t.status,
-               b.full_name, b.position, b.grade_level, b.section, b.purpose,
+               t.borrow_date, t.borrow_time, t.return_date, t.return_time, t.status, t.condition_report,
+               b.full_name, b.id_number, b.position, b.grade_level, b.section, b.purpose,
                d.device_name, d.category
         FROM transactions t
         JOIN borrowers b ON t.borrower_id = b.borrower_id
@@ -27,8 +27,9 @@ public class TransactionDao {
     public void insert(Connection conn, Transaction txn) throws SQLException {
         String sql = """
             INSERT INTO transactions (transaction_id, borrower_id, device_id, quantity,
-                                      borrow_date, borrow_time, return_date, return_time, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                      borrow_date, borrow_time, return_date, return_time, status,
+                                      condition_report)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, txn.getTransactionId());
@@ -40,20 +41,23 @@ public class TransactionDao {
             ps.setString(7, txn.getReturnDate() != null ? txn.getReturnDate().toString() : null);
             ps.setString(8, txn.getReturnTime() != null ? txn.getReturnTime().toString() : null);
             ps.setString(9, txn.getStatus());
+            ps.setString(10, txn.getConditionReport());
             ps.executeUpdate();
         }
     }
 
     public void markReturned(Connection conn, String transactionId,
-                             LocalDate returnDate, LocalTime returnTime) throws SQLException {
+                             LocalDate returnDate, LocalTime returnTime,
+                             String conditionReport) throws SQLException {
         String sql = """
-            UPDATE transactions SET return_date = ?, return_time = ?, status = 'Returned'
+            UPDATE transactions SET return_date = ?, return_time = ?, status = 'Returned', condition_report = ?
             WHERE transaction_id = ? AND status = 'Borrowed'
             """;
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, returnDate.toString());
             ps.setString(2, returnTime.toString());
-            ps.setString(3, transactionId);
+            ps.setString(3, conditionReport);
+            ps.setString(4, transactionId);
             int updated = ps.executeUpdate();
             if (updated == 0) {
                 throw new SQLException("Transaction not found or already returned: " + transactionId);
@@ -167,7 +171,9 @@ public class TransactionDao {
             t.setReturnTime(LocalTime.parse(rt));
         }
         t.setStatus(rs.getString("status"));
+        t.setConditionReport(rs.getString("condition_report"));
         t.setBorrowerName(rs.getString("full_name"));
+        t.setIdNumber(rs.getString("id_number"));
         t.setPosition(rs.getString("position"));
         t.setGradeLevel(rs.getString("grade_level"));
         t.setSection(rs.getString("section"));

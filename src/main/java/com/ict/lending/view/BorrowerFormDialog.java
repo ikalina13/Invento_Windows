@@ -24,6 +24,8 @@ public class BorrowerFormDialog extends Dialog<Borrower> {
         getDialogPane().getButtonTypes().addAll(submitType, ButtonType.CANCEL);
 
         TextField nameField = new TextField();
+        TextField idNumberField = new TextField();
+        idNumberField.setPromptText("e.g. Student/Employee ID");
         ComboBox<String> positionBox = new ComboBox<>(FXCollections.observableArrayList(
                 "Student", "Teacher", "Staff"));
         positionBox.setValue("Student");
@@ -42,6 +44,8 @@ public class BorrowerFormDialog extends Dialog<Borrower> {
         int row = 0;
         grid.add(new Label("Full Name"), 0, row);
         grid.add(nameField, 1, row++);
+        grid.add(new Label("ID Number"), 0, row);
+        grid.add(idNumberField, 1, row++);
         grid.add(new Label("Position"), 0, row);
         grid.add(positionBox, 1, row++);
         grid.add(new Label("Grade / Department"), 0, row);
@@ -63,6 +67,7 @@ public class BorrowerFormDialog extends Dialog<Borrower> {
             }
             Borrower b = new Borrower();
             b.setFullName(nameField.getText());
+            b.setIdNumber(idNumberField.getText());
             b.setPosition(positionBox.getValue());
             b.setGradeLevel(gradeField.getText());
             b.setSection(sectionField.getText());

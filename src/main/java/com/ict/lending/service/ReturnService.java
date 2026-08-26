@@ -29,9 +29,11 @@ public class ReturnService {
     /**
      * Verifies borrower identity fields then completes the return.
      */
-    public Transaction returnDevice(String transactionId, String fullName, String position,
-                                    String gradeLevel, String section) {
+    public Transaction returnDevice(String transactionId, String fullName, String idNumber,
+                                    String position, String gradeLevel, String section,
+                                    String conditionReport) {
         Validators.requireNonBlank(fullName, "Full name");
+        Validators.requireNonBlank(idNumber, "ID number");
         Validators.requireNonBlank(position, "Position");
         Validators.requireNonBlank(gradeLevel, "Grade level / Department");
         Validators.requireNonBlank(section, "Section");
@@ -43,6 +45,7 @@ public class ReturnService {
                 throw new IllegalArgumentException("This transaction is already returned.");
             }
             if (!matches(existing.getBorrowerName(), fullName)
+                    || !matches(existing.getIdNumber(), idNumber)
                     || !matches(existing.getPosition(), position)
                     || !matches(existing.getGradeLevel(), gradeLevel)
                     || !matches(existing.getSection(), section)) {
@@ -55,13 +58,15 @@ public class ReturnService {
                 try {
                     LocalDate returnDate = LocalDate.now();
                     LocalTime returnTime = LocalTime.now().withNano(0);
-                    transactionDao.markReturned(conn, transactionId, returnDate, returnTime);
+                    String report = Validators.isBlank(conditionReport) ? null : conditionReport.trim();
+                    transactionDao.markReturned(conn, transactionId, returnDate, returnTime, report);
                     restoreInventory(conn, existing.getDeviceId(), existing.getQuantity());
                     conn.commit();
 
                     existing.setReturnDate(returnDate);
                     existing.setReturnTime(returnTime);
                     existing.setStatus("Returned");
+                    existing.setConditionReport(report);
                     auditService.log("RETURN",
                             transactionId + " — " + existing.getQuantity() + "x "
                                     + existing.getDeviceName() + " from " + existing.getBorrowerName());

@@ -13,8 +13,10 @@ public class ReturnController {
         return returnService.listActive(search);
     }
 
-    public Transaction returnDevice(String transactionId, String fullName, String position,
-                                    String gradeLevel, String section) {
-        return returnService.returnDevice(transactionId, fullName, position, gradeLevel, section);
+    public Transaction returnDevice(String transactionId, String fullName, String idNumber,
+                                    String position, String gradeLevel, String section,
+                                    String conditionReport) {
+        return returnService.returnDevice(transactionId, fullName, idNumber, position, gradeLevel,
+                section, conditionReport);
     }
 }
